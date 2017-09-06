@@ -3,6 +3,8 @@
 
 #include <libcgc.h>
 
+#if !defined(_CGC_EMU)
+
 typedef char                __int8_t;
 typedef unsigned char       __uint8_t;
 typedef short               __int16_t;
@@ -12,7 +14,7 @@ typedef unsigned int        __uint32_t;
 typedef long long           __int64_t;
 typedef unsigned long long  __uint64_t;
 
-typedef __int8_t     int8_t; 
+typedef __int8_t     int8_t;
 typedef __uint8_t    uint8_t;
 typedef __int16_t    int16_t;
 typedef __uint16_t   uint16_t;
@@ -27,6 +29,12 @@ typedef __builtin_va_list va_list;
 
 #define va_start(ap, last) \
         __builtin_va_start((ap), (last))
+
+#else
+
+#include <stdint.h>
+
+#endif
 
 #endif
 

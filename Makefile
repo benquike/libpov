@@ -22,7 +22,7 @@ AR = /usr/i386-linux-cgc/bin/ar
 
 else
 
-CFLAGS  = -fsanitize=address -c -Wall -Wextra -pedantic -DNPATCHED -Iinclude -Ilib -I../libcgc -g -O0 -Wno-overlength-strings -Wno-packed -Wno-unused-function
+CFLAGS  = -fsanitize=address -c -m32 -D_CGC_EMU -Wall -Wextra -pedantic -DNPATCHED -Iinclude -Ilib -I../libcgc -g -O0 -Wno-overlength-strings -Wno-packed -Wno-unused-function
 
 CC = clang
 LD = $(CC)
