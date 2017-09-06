@@ -12,11 +12,23 @@ INCDIR	= $(DESTDIR)/usr/include
 MANDIR	= $(DESTDIR)/usr/share/man/man3
 
 AR_FLAGS = cru
+
+ifneq ("$(findstring,cgc,$(UNAME_R))","")
 CFLAGS  = -c -Wall -Wextra -pedantic -DNPATCHED -nostdlib -fno-builtin -nostdinc -Iinclude -Ilib -I/usr/include -g -O0 -Wno-overlength-strings -Wno-packed -Wno-unused-function
 
 CC = /usr/i386-linux-cgc/bin/clang
 LD = /usr/i386-linux-cgc/bin/ld
 AR = /usr/i386-linux-cgc/bin/ar
+
+else
+
+CFLAGS  = -fsanitize=address -c -Wall -Wextra -pedantic -DNPATCHED -Iinclude -Ilib -I../libcgc -g -O0 -Wno-overlength-strings -Wno-packed -Wno-unused-function
+
+CC = clang
+LD = $(CC)
+AR = ar
+
+endif
 
 %.3.gz: %.md
 	pandoc -s -t man $< | gzip -9 > $@
